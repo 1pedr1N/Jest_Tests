@@ -1,4 +1,4 @@
-import {render } from '@testing-library/react';
+import {getByPlaceholderText, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import App from "./App"
 
@@ -10,10 +10,13 @@ describe( 'App Component' , () => {
         expect(getByText('Agnes' )).toBeInTheDocument()
     } )
     it('should be able add new item to list', () => {
-        const {getByText} = render(<App />)
-
-        const addButton = getByText('Novo' )
+        const {getByText, getByPlaceholderText  } = render(<App />)
+const inputElement = getByPlaceholderText('Novo item')
+const addButton = getByText('Adicionar')
 userEvent.click(addButton)
+
+userEvent.type(inputElement, 'Novo')
+
 expect(getByText('Novo' )).toBeInTheDocument()
-    } )
+    })
 } )
