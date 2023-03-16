@@ -3,9 +3,16 @@ import { useState } from "react"
 
 function App() {
 const [list, setList] = useState([ 'Pedro', 'Clara', 'Agnes' ])
-const [item, setItem] = useState('' )
+const [item, setItem] = useState('')
 function addToList() {
+setTimeout(() => {
   setList(state => [...state, item] )
+}, 500)
+}
+function removeFromList(item: string) {
+  setTimeout(() => {
+    setList(state => state.filter(item => item != item))
+  })
 }
   return (
    <>
@@ -13,6 +20,7 @@ function addToList() {
 <button onClick={addToList}>Adicionar</button>
 <ul>
   {list.map((item) => <li key={item}> {item} </li>) }
+  <button onClick={() => removeFromList (item)}>Remover</button>
 </ul>
    </>
   )
